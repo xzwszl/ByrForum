@@ -1,6 +1,7 @@
 # ByrForum
 这是一款北邮人客户端“心邮”，取我心邮你的意思。
 也算是我的一个习作，后续还会不断丰富和完善~
-由于开发北邮人论坛需申请key，如果有兴趣可以咨询肖导，北邮人数据和接口也都github上：https://github.com/xw2423/nForum/wiki/nForum-API，鉴于appkey的保密性，我暂时不放在源码里，尽情谅解~
+由于开发北邮人论坛需申请key，如果有兴趣可以咨询肖导，北邮人数据和接口也都github上：https://github.com/xw2423/nForum/wiki/nForum-API
+鉴于appkey的保密性，我暂时不放在源码里，尽情谅解~
 
 另感谢北邮人论坛和无私的开源库代码发布者~~
