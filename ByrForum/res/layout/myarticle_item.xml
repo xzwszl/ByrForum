@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:minHeight="60dp"
+    android:orientation="horizontal"
+    android:background="?mainItemBackground">
+
+    <xzw.szl.byr.view.CircleImageView
+        android:id="@+id/myarticle_imageview"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"/>
+    
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+        
+        
+        <TextView android:id="@+id/myarticle_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="25dp"
+            android:layout_marginBottom="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textSize="18sp"
+            android:textColor="?mainFontColor"/>
+        
+		<TextView android:id="@+id/myarticle_userid"
+		    android:layout_height="wrap_content"
+		    android:layout_width="wrap_content"
+		    android:textSize="14sp"
+		    android:layout_alignParentLeft="true"
+		    android:layout_below="@id/myarticle_title"
+		    android:textColor="?subFontColor"/>
+		 
+		<TextView android:id="@+id/myarticle_time"
+		    android:layout_height="wrap_content"
+		    android:layout_width="wrap_content"
+		    android:textSize="14sp"
+		    android:layout_alignParentRight="true"
+		    android:layout_below="@id/myarticle_title"
+		    android:textColor="?subFontColor"/>       
+    </RelativeLayout>
+
+</LinearLayout>

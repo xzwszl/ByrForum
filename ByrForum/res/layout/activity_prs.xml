@@ -1,0 +1,113 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:toggle="http://schemas.android.com/apk/res/xzw.szl.byr"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="?mainBackground"
+    android:orientation="vertical"
+    android:paddingTop="10dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="1dp"
+        android:background="?mainItemBackground"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:id="@+id/text_2G3G"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/image_load"
+            android:textColor="?mainFontColor"
+            android:textSize="18sp"/>
+
+        <com.zcw.togglebutton.ToggleButton
+            android:id="@+id/toggle_2G3G"
+            android:layout_width="54dp"
+            android:layout_height="30dp"
+            toggle:spotColor="?mainItemBackground"
+            toggle:offColor="?mainItemBackground"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
+        android:background="?mainItemBackground"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center_vertical">
+        
+        <TextView
+            android:id="@+id/text_remind"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/info_remind"
+            android:textColor="?mainFontColor"
+            android:textSize="18sp" />
+
+        <com.zcw.togglebutton.ToggleButton
+            android:id="@+id/toggle_remind"
+            android:layout_width="54dp"
+            android:layout_height="30dp"
+            toggle:spotColor="?mainItemBackground"
+            toggle:offColor="?mainItemBackground"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="?mainItemBackground"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" >
+
+        <TextView
+            android:id="@+id/text_cache"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:text="@string/clear_cache"
+            android:textColor="?mainFontColor"
+            android:textSize="18sp" />
+ 
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_aboutus"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="?mainItemBackground"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/about_us"
+        android:textColor="?mainFontColor"
+        android:textSize="18sp" 
+        android:clickable="true"/>
+
+    <TextView
+        android:id="@+id/text_version"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="1dp"
+        android:background="?mainItemBackground"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/version_info"
+        android:textColor="?mainFontColor"
+        android:textSize="18sp" 
+        android:clickable="true"/>
+
+</LinearLayout>

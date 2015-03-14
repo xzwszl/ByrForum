@@ -1,0 +1,113 @@
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+	       android:layout_width="fill_parent"
+	       android:layout_height="fill_parent" 
+	       android:orientation="vertical"
+	       android:background="@color/home_back">
+	       	
+	   <ScrollView
+	       android:id="@+id/scrollView1"
+	       android:layout_width="match_parent"
+	       android:layout_height="0dp"
+	       android:layout_weight="1"
+	       android:background="@drawable/boardheader">
+
+	       <LinearLayout
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:orientation="vertical"
+	           android:paddingTop="10sp"
+	           android:paddingLeft="10sp"
+	           android:paddingRight="10sp"
+	           android:paddingBottom="5sp">
+	           
+	           <EditText
+			        android:id="@+id/post_title"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:hint="@string/post_title"
+			        android:textSize="20sp"
+			        android:layout_marginBottom="5sp"
+			        android:background="@null"
+			        android:textColor="@android:color/white"/>
+	           
+	           <View android:layout_width="match_parent"
+	               android:layout_height="1dp"
+	               android:background="@color/light"/>
+	            
+	           <EditText
+			        android:id="@+id/post_content"
+			        android:layout_width="match_parent"
+			        android:layout_height="match_parent"
+			        android:hint="@string/post_content"
+			        android:textColor="@color/light_white"
+			        android:background="@null"
+			        android:gravity="top"/>
+	       	</LinearLayout>
+	   	</ScrollView>
+	      
+	   <HorizontalScrollView
+			        android:id="@+id/gallery1"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"> 
+			        
+			        <LinearLayout 
+			            android:layout_width="wrap_content"
+			            android:layout_height="50sp"
+			            android:id="@+id/pictureLayout"
+			            android:orientation="horizontal"
+			            android:gravity="center_vertical"
+			            android:visibility="gone">
+			            
+			        </LinearLayout>
+		</HorizontalScrollView>
+	    <!-- 抽屉 -->
+	    <LinearLayout android:orientation="horizontal"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:paddingBottom="5sp"
+	        android:paddingTop="5sp"
+	        android:divider="@drawable/linearlayout_divider"
+	        android:showDividers="middle"
+	        android:background="@drawable/bottom">
+
+	
+	        <ImageView
+	            android:id="@+id/image_face"
+	            android:layout_width="25dp"
+	            android:layout_height="25dp"
+	            android:src="@drawable/happy_face"
+	            android:contentDescription="@string/image_desc"
+	            android:layout_weight="1"/>
+	        <ImageView
+	            android:id="@+id/image_camera"
+	        	android:layout_width="25dp"
+	            android:layout_height="25dp"
+	            android:src="@drawable/camera"
+	            android:contentDescription="@string/image_desc"
+	            android:layout_weight="1"/>
+	        <ImageView
+	            android:id="@+id/image_picture"
+	            android:layout_width="25dp"
+	            android:layout_height="25dp"
+	            android:src="@drawable/picture"
+	            android:contentDescription="@string/image_desc"
+	            android:layout_weight="1"/>
+	        <ImageView
+	            android:id="@+id/image_attach"
+	            android:layout_width="25dp"
+	            android:layout_height="25dp"
+	            android:src="@drawable/file"
+	            android:contentDescription="@string/image_desc"
+	            android:layout_weight="1"/>
+	    </LinearLayout>
+
+
+		<View android:layout_width="match_parent"
+	               android:layout_height="1dp"
+	               android:background="@android:color/darker_gray"/>
+        <xzw.szl.byr.view.FaceSelectView
+            android:id="@+id/post_face_layout"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:visibility="gone"/>
+</LinearLayout>

@@ -1,0 +1,280 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="@android:style/Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. 
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="android:actionBarStyle">@style/ActionBar</item>
+        <item name="android:actionBarTabTextStyle">@style/ActionBarTabText</item>
+        <item name="android:actionBarTabStyle">@style/ActionBarTab</item>
+    </style>
+
+    <style name="ActionBarTab" parent="@android:style/Widget.Holo.ActionBar.TabView">
+        <item name="android:background">@drawable/login_reg_normal</item>
+    </style>
+    <style name="ActionBarTabText" parent="@android:style/Widget.Holo.ActionBar.TabText">
+        <item name="android:textColor">@color/daymainbk</item>
+    </style>
+    <style name="ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@drawable/login_bg</item>
+       
+        <item name="android:titleTextStyle">@style/ActionBarTitleText</item>
+    </style>
+
+    <style name="ActionBarTitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    
+    <style name="Theme.Popup" parent="AppTheme">
+        <item name="android:popupMenuStyle">@style/Theme.PopupMenu</item>
+    </style>
+   
+    <style name="Theme.PopupMenu" parent="@android:style/Widget.Holo.PopupMenu">
+        <item name="android:popupBackground">@color/popupwindow_background</item>
+    </style>
+
+    <style name="ActionBarTitleText">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+    </style>-->
+ 	<style name="ActionBarTitleText" parent="TextAppearance.Sherlock.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    
+ 	 
+ 	<style name="ActionBarTabText" parent="Widget.Sherlock.Light.ActionBar.TabText">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/sc_dialog</item>
+        <item name="android:backgroundDimEnabled">false</item>
+       
+    </style>
+    
+    <style name="RadioButton">
+        <item name="android:textColor">@drawable/button_text_color</item>
+        <item name="android:minHeight">33dp</item>
+        <item name="android:minWidth">70dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+    </style>
+    
+
+    <!-- actionbar -->
+    <style name="Theme.Day" parent="Theme.Sherlock.Light">
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_myaction</item>
+        <item name="actionBarItemBackground">@drawable/selectable_background_myaction</item>
+        
+        <item name="android:popupMenuStyle">@style/PopupMenu.Myaction</item>
+        <item name="popupMenuStyle">@style/PopupMenu.Myaction</item>
+        
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Myaction</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Myaction</item>
+        
+        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Myaction</item>
+        <item name="actionBarTabStyle">@style/ActionBarTabStyle.Myaction</item>
+        
+        <item name="android:actionDropDownStyle">@style/DropDownNav.Myaction</item>
+        <item name="actionDropDownStyle">@style/DropDownNav.Myaction</item>
+        
+        <item name="android:itemTextAppearance">@style/ActionBar.Menu</item>
+        <item name="itemTextAppearance">@style/ActionBar.Menu</item>
+        
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.Myaction</item>
+        <item name="actionBarStyle">@style/ActionBar.Solid.Myaction</item>
+        
+        <item name="android:actionBarTabTextStyle">@style/ActionBarTabText</item>
+        <item name="actionBarTabTextStyle">@style/ActionBarTabText</item>
+        
+        <item name="mainBackground">@color/daymainbk</item>
+        <item name="mainItemBackground">@color/daymainitembk</item>
+        <item name="subItemBackground">@color/daysubitembk</item>
+        <item name="mainFontColor">@color/daymainFontColor</item>
+        <item name="subFontColor">@color/daysubFontColor</item>
+        <item name="favorItemBackground">@color/dayfavoritembk</item>
+        <item name="favorFontColor">@color/daymainitembk</item>
+        <item name="sepcialBackground">#ffffff</item>
+        <item name="faceDrawable">@drawable/article_face</item>
+        <item name="sendDrawable">@drawable/article_send</item>
+        
+    </style>
+
+    <!--  
+    <style name="Theme.Night" parent="@style/Theme.DefaultNight">
+     
+        <item name="android:actionBarTabTextStyle">@style/ActionBarTabText</item>
+          
+      	<item name="mainBackground">@color/nightmainbk</item>
+      	<item name="mainItemBackground">@color/nightmainitembk</item>
+        <item name="subItemBackground">@color/nightsubitembk</item>
+      	<item name="mainFontColor">@color/nightmainFontColor</item>
+      	<item name="subFontColor">@color/nightsubFontColor</item>
+      	<item name="favorItemBackground">@color/nightfavoritembk</item>
+      	<item name="favorFontColor">@color/nightmainFontColor</item>
+    </style>
+    -->
+	<style name="ActionBar.Menu" parent="@android:style/TextAppearance">
+	    <item name="android:textColor">@android:color/white</item>
+	</style>
+    <style name="ActionBar.Solid.Myaction" parent="Widget.Sherlock.Light.ActionBar">
+        <item name="android:background">@drawable/login_bg</item>
+        <item name="background">@drawable/login_bg</item>
+       	<item name="android:backgroundStacked">@drawable/ab_stacked_solid_myaction</item>
+       	<item name="backgroundStacked">@drawable/ab_stacked_solid_myaction</item>
+        <item name="android:backgroundSplit">@drawable/ab_bottom_solid_myaction</item>
+        <item name="backgroundSplit">@drawable/ab_bottom_solid_myaction</item>
+      <!--    <item name="android:progressBarStyle">@style/ProgressBar.Myaction</item> -->
+        <item name="android:titleTextStyle">@style/ActionBarTitleText</item>
+        <item name="titleTextStyle">@style/ActionBarTitleText</item> 
+    </style>
+
+    <style name="ActionBar.Transparent.Myaction" parent="Widget.Sherlock.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@drawable/ab_transparent_myaction</item>
+       <!--   <item name="android:progressBarStyle">@style/ProgressBar.Myaction</item>-->
+    </style>
+	
+ 
+    <style name="PopupMenu.Myaction" parent="Widget.Sherlock.Light.PopupMenu">	
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_myaction</item>
+    </style>
+	
+    <style name="DropDownListView.Myaction" parent="Widget.Sherlock.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_myaction</item>
+        <!-- <item name="listSelector">@drawable/selectable_background_myaction</item> -->
+    </style>
+
+    <style name="ActionBarTabStyle.Myaction" parent="Widget.Sherlock.Light.ActionBar.TabBar">
+        <item name="android:background">@drawable/tab_indicator_ab_myaction</item>
+        <item name="background">@drawable/tab_indicator_ab_myaction</item>
+        <item name="android:gravity">center</item>
+    </style>
+	
+    <style name="DropDownNav.Myaction" parent="Widget.Sherlock.Light.Spinner.DropDown.ActionBar">
+        <item name="android:background">@drawable/spinner_background_ab_myaction</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_myaction</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_myaction</item>
+        
+        <item name="background">@drawable/spinner_background_ab_myaction</item>
+        <!-- 
+        <item name="popupBackground">@drawable/menu_dropdown_panel_myaction</item>
+        <item name="dropDownSelector">@drawable/selectable_background_myaction</item> -->
+    </style>
+      <!-- 
+    <style name="ProgressBar.Myaction" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_myaction</item>
+    </style>
+  
+    <style name="ActionButton.CloseMode.Myaction" parent="@style/Widget.AppCompat.ActionButton.CloseMode">
+        <item name="android:background">@drawable/btn_cab_done_myaction</item>
+    </style> -->
+    <!-- this style is only referenced in a Light.DarkActionBar based theme
+    <style name="Theme.Myaction.Widget" parent="@style/Theme.AppCompat">
+        <item name="popupMenuStyle">@style/PopupMenu.Myaction</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Myaction</item>
+    </style>
+     -->
+  <style name="Theme.Night" parent="Theme.Sherlock">
+      
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_night</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu.Night</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Night</item>
+        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Night</item>
+        <item name="android:actionDropDownStyle">@style/DropDownNav.Night</item>
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.Night</item>
+        <item name="android:actionModeBackground">@drawable/cab_background_top_night</item>
+        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_night</item>
+        
+        <item name="actionBarItemBackground">@drawable/selectable_background_night</item>
+        <item name="popupMenuStyle">@style/PopupMenu.Night</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Night</item>
+        <item name="actionBarTabStyle">@style/ActionBarTabStyle.Night</item>
+        <item name="actionDropDownStyle">@style/DropDownNav.Night</item>
+        <item name="actionBarStyle">@style/ActionBar.Solid.Night</item>
+        <item name="actionModeBackground">@drawable/cab_background_top_night</item>
+        <item name="actionModeSplitBackground">@drawable/cab_background_bottom_night</item>
+        <!--<item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Night</item>
+		<item name="android:actionBarTabTextStyle">@style/ActionBarTabText</item>-->
+		
+        <item name="mainBackground">@color/nightmainbk</item>
+      	<item name="mainItemBackground">@color/nightmainitembk</item>
+        <item name="subItemBackground">@color/nightsubitembk</item>
+      	<item name="mainFontColor">@color/nightmainFontColor</item>
+      	<item name="subFontColor">@color/nightsubFontColor</item>
+      	<item name="favorItemBackground">@color/nightfavoritembk</item>
+      	<item name="favorFontColor">@color/nightmainFontColor</item>
+      	<item name="sepcialBackground">#000000</item>
+      	<item name="faceDrawable">@drawable/article_face1</item>
+        <item name="sendDrawable">@drawable/article_send1</item>
+        
+    </style>
+
+    <style name="ActionBar.Solid.Night" parent="Widget.Sherlock.Light.ActionBar">
+        <item name="android:background">@drawable/ab_solid_night</item>
+        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_night</item>
+        <item name="android:backgroundSplit">@drawable/ab_bottom_solid_night</item>
+        
+        <item name="background">@drawable/ab_solid_night</item>
+        <item name="backgroundStacked">@drawable/ab_stacked_solid_night</item>
+        <item name="backgroundSplit">@drawable/ab_bottom_solid_night</item>
+        
+        <!--  <item name="progressBarStyle">@style/ProgressBar.Night</item>-->
+    </style>
+ 
+    <style name="ActionBar.Transparent.Night" parent="Widget.Sherlock.Light.ActionBar.Solid.Inverse">
+        <item name="background">@drawable/ab_transparent_night</item>
+        <!--  <item name="progressBarStyle">@style/ProgressBar.Night</item>-->
+    </style>
+	
+    <style name="PopupMenu.Night" parent="Widget.Sherlock.Light.PopupMenu">	
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_night</item>	
+    </style>
+	
+    <style name="DropDownListView.Night" parent="Widget.Sherlock.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_night</item>
+    </style>
+
+    <style name="ActionBarTabStyle.Night" parent="Widget.Sherlock.Light.ActionBar.TabBar">
+        <item name="android:background">@drawable/tab_indicator_ab_night</item>
+        <item name="background">@drawable/tab_indicator_ab_night</item>
+        <item name="android:gravity">center</item>
+    </style>
+	
+    <style name="DropDownNav.Night" parent="Widget.Sherlock.Light.Spinner.DropDown.ActionBar">
+        <item name="android:background">@drawable/spinner_background_ab_night</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_night</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_night</item>
+        <item name="background">@drawable/spinner_background_ab_night</item>
+    </style>
+    
+    <!--  
+    <style name="ProgressBar.Night" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_night</item>
+    </style>
+    
+    <style name="ActionButton.CloseMode.Night" parent="@style/Widget.AppCompat.Light.ActionButton.CloseMode">
+        <item name="android:background">@drawable/btn_cab_done_night</item>
+    </style>-->
+    <!-- this style is only referenced in a Light.DarkActionBar based theme 
+    <style name="Theme.Night.Widget" parent="@style/Theme.AppCompat">
+        <item name="popupMenuStyle">@style/PopupMenu.Night</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Night</item>
+    </style>
+    -->
+</resources>

@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:paddingBottom="10sp"
+    android:background="?mainBackground">
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10sp"
+        android:paddingTop="3sp"
+        android:paddingBottom="3sp">
+        
+        <TextView 
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/sd_dir"
+            android:textSize="18sp"
+            android:paddingTop="5sp"
+            android:textColor="?mainFontColor"/>
+        <ImageView
+            android:id="@+id/imageview_sddir_back"
+            android:layout_width="36sp"
+            android:layout_height="36sp"
+            android:src="@drawable/sd_dir_back"
+            android:contentDescription="@string/image_desc"/> 
+    </LinearLayout>
+    
+    <View android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:background="@color/user_dialog_item"/>
+    <ListView
+        android:id="@+id/listView_sddir"
+        android:layout_width="match_parent"
+        android:layout_height="300sp" >
+    </ListView>
+
+</LinearLayout>

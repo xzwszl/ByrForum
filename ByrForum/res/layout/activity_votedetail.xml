@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:background="?mainBackground">
+
+    <TextView
+        android:id="@+id/votedetail_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="5dp"
+        android:textColor="?mainFontColor"/>
+
+    <TextView
+        android:id="@+id/votedetail_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="?subFontColor"
+        android:textSize="14sp"
+        android:layout_marginTop="5dp"/>
+    <ListView
+        android:id="@+id/votedetail_listView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:listSelector="@android:color/transparent"
+        android:layout_marginTop="10dp">
+    </ListView>
+
+    <Button
+        android:layout_marginTop="5dp"
+        android:id="@+id/votedetail_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/daymainitembk"/>
+</LinearLayout>

@@ -1,0 +1,75 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:minWidth="300dp"
+    android:background="?mainBackground">
+    
+    
+    <TextView android:id="@+id/back"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:drawableLeft="@drawable/sub_left"
+	    android:text="@string/back"
+	    android:textSize="18sp"
+	    android:textColor="@drawable/button_text_color"
+	    android:background="?mainBackground"/>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="-10dp"
+        android:background="#00000000">
+        
+   		   <ImageView
+	            android:id="@+id/imageView_sayhello"
+	            android:layout_width="0dp"
+	            android:layout_height="20dp"
+	            android:contentDescription="@string/image_desc"
+	            android:src="@drawable/article_send"
+	            android:layout_weight="1"
+	            android:layout_gravity="bottom"/>
+   		   
+   		   	
+		    <LinearLayout android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:orientation="vertical"
+		        android:layout_weight="1"
+		        android:gravity="center_horizontal">
+		        
+		        <xzw.szl.byr.view.CircleImageView 
+			        android:layout_width="50dp"
+			        android:layout_height="50dp"
+			        android:id="@+id/face"/>
+    
+	   		 	<TextView
+		            android:id="@+id/textView_id"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:textSize="14sp"/>
+		        
+		    </LinearLayout>
+        
+        
+           <ImageView
+	            android:id="@+id/imageView_addfriend"
+	            android:layout_width="0dp"
+	            android:layout_height="20dp"
+	            android:contentDescription="@string/image_desc"
+	            android:src="@drawable/add_friend"
+	            android:layout_weight="1"
+	            android:layout_gravity="bottom"/>
+       
+    </LinearLayout>
+
+   
+   
+    <ListView
+        android:id="@+id/listView_userinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+</LinearLayout>

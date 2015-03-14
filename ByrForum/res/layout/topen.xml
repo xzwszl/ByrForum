@@ -1,0 +1,67 @@
+<LinearLayout
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?mainItemBackground"
+      android:orientation="vertical">
+      
+      <LinearLayout android:orientation="horizontal"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+      	  android:paddingLeft="10dp"
+      	  android:paddingRight="10dp"
+      	  android:paddingTop="2dp">
+          
+          <TextView
+	        android:id="@+id/topten_article"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:textSize="16sp"
+	        android:layout_marginBottom="2dp"
+	        android:layout_marginRight="10dp"
+	        android:textColor="?mainFontColor"
+	        android:ellipsize="end"
+	        android:singleLine="true"/>
+          
+          <TextView
+           android:id="@+id/topten_reply_up"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textColor="?subFontColor"
+           android:textSize="12sp"/>
+      </LinearLayout>        
+      
+
+	  <LinearLayout
+	       android:layout_width="match_parent"
+	       android:layout_height="wrap_content"
+	       android:orientation="horizontal"
+	       android:background="?subItemBackground"
+	       android:paddingTop="1dp"
+	       android:paddingBottom="1dp"
+	       android:id="@+id/second_level_view">
+	
+	  	    <TextView
+	            android:id="@+id/topten_user"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textSize="12sp"
+	            android:gravity="center"
+	            android:layout_weight="1"/>
+	  	    
+	  	    <TextView android:layout_width="0dp"
+	  	        android:layout_height="wrap_content"
+	  	        android:layout_weight="1"/>
+	  	       
+	       <ImageView
+	           android:id="@+id/topten_love"
+	           android:layout_width="wrap_content"
+	           android:layout_height="match_parent"
+	           android:layout_weight="1"
+	           android:contentDescription="@string/image_desc"
+	           android:src="@android:drawable/star_off"
+	           android:tag="off"/>
+	
+	   </LinearLayout>
+</LinearLayout>

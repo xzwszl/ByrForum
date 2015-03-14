@@ -1,0 +1,62 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:padding="5dp"
+    android:background="?mainItemBackground">
+
+    <LinearLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+        
+	    <xzw.szl.byr.view.CircleImageView
+	        android:id="@+id/vote_imageview"
+	        android:layout_width="40dp"
+	        android:layout_height="40dp"
+	        android:focusable="false"/>
+	    
+	     <TextView android:id="@+id/vote_num"
+	        android:textSize="12sp"
+	        android:layout_height="wrap_content"
+	        android:layout_width="wrap_content"
+	        android:textColor="@android:color/white"
+	        android:background="@color/green"
+	        android:minWidth="40dp"
+	        android:gravity="center"/>
+	    
+   </LinearLayout>
+	    
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+        
+        
+        <TextView android:id="@+id/vote_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="30dp"
+            android:layout_marginBottom="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textSize="18sp"
+            android:textColor="?mainFontColor"/>
+        
+		<TextView android:id="@+id/vote_id"
+		    android:layout_height="wrap_content"
+		    android:layout_width="wrap_content"
+		    android:textSize="14sp"
+		    android:layout_alignParentLeft="true"
+		    android:layout_below="@id/vote_title"
+		    android:textColor="?subFontColor"/>
+		 
+		<TextView android:id="@+id/vote_end"
+		    android:layout_height="wrap_content"
+		    android:layout_width="wrap_content"
+		    android:textSize="14sp"
+		    android:layout_alignParentRight="true"
+		    android:layout_below="@id/vote_title"
+		    android:textColor="?subFontColor"/>       
+    </RelativeLayout>
+</LinearLayout>

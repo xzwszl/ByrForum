@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:paddingTop="3sp"
+    android:paddingBottom="3sp"
+    android:background="?mainBackground">
+    
+   <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="?mainItemBackground">
+        
+    <TextView android:id="@+id/articletitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20sp"
+        android:textSize="16sp"
+        android:layout_marginLeft="10sp"
+        android:drawablePadding="15sp"
+        android:layout_marginTop="2sp"
+        android:layout_marginBottom="2sp"
+        android:textColor="?mainFontColor"/>
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?mainBackground"/>
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+        
+        <TextView android:id="@+id/articleauth"
+		   android:layout_width="0dp"
+		   android:layout_height="wrap_content"
+		   android:layout_marginLeft="5sp"
+		   android:textSize="12sp"
+		   android:textColor="?subFontColor"
+		   android:drawablePadding="10sp"
+		   android:layout_weight="3"/>
+        
+        <TextView android:id="@+id/articletime"
+	       android:layout_width="0dp"
+	       android:layout_height="wrap_content"
+	       android:layout_marginRight="10sp"
+	       android:textSize="12sp"
+	       android:textColor="?subFontColor"
+	       android:layout_gravity="right"
+	       android:drawablePadding="10sp"
+	       android:layout_weight="2"/>
+	
+		 <TextView android:id="@+id/articlereply"
+		   android:layout_width="0dp"
+		   android:layout_height="wrap_content"
+		   android:textColor="?subFontColor"
+		   android:textSize="12sp"
+		   android:drawablePadding="10sp"
+		   android:layout_weight="1"/>
+        
+    </LinearLayout>
+	
+	 </LinearLayout>
+</LinearLayout>

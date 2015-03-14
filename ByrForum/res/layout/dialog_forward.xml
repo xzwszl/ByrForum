@@ -1,0 +1,62 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:minWidth="300dp"
+    android:background="?mainBackground">
+
+    
+    <TextView android:id="@+id/cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@drawable/button_text_color"
+        android:text="@string/back"
+        android:background="?mainBackground"
+        android:textSize="20sp"
+        android:drawableLeft="@drawable/sub_left"/>
+       
+     <EditText android:id="@+id/reciver"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="10dp"
+          android:layout_marginRight="10dp"
+          android:hint="@string/reciver"
+          android:layout_marginBottom="5dp"
+          android:layout_marginTop="5dp"
+          android:background="@drawable/edittext_bk"
+          android:padding="3dp"/>
+   
+     
+    <CheckBox android:id="@+id/threads"
+        android:text="@string/forward_threads"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="2dp"
+        android:textColor="@color/grey"/>
+    
+     <CheckBox android:id="@+id/noref"
+        android:text="@string/forward_noref"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="2dp"
+        android:textColor="@color/grey"/>
+     
+     <CheckBox android:id="@+id/noatt"
+        android:text="@string/forward_noattach"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/grey"/>
+     
+     <TextView android:id="@+id/submit"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:background="@color/green"
+         android:textColor="@android:color/white"
+         android:gravity="center"
+         android:layout_margin="5dp"
+         android:textSize="16sp"
+         android:padding="3dp"/>
+</LinearLayout>

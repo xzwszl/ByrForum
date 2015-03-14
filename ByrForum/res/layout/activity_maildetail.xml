@@ -1,0 +1,98 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" > 
+	  <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="0dp"
+	        android:orientation="vertical"
+	        android:layout_weight="1"
+	        android:background="?subItemBackground">
+
+	       <RelativeLayout android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:background="?mainItemBackground"
+	            android:padding="5dp">
+	            <xzw.szl.byr.view.CircleImageView 
+	                android:layout_width="40dp"
+	                android:layout_height="40dp"
+	                android:id="@+id/face"
+	                android:layout_alignParentLeft="true"
+	                android:layout_alignParentTop="true"/>
+	            
+	           	<TextView android:id="@+id/title"
+		           android:layout_width="match_parent"
+		           android:layout_height="wrap_content"
+		           android:textSize="18sp"
+		           android:textColor="?mainFontColor"
+		           android:layout_alignParentTop="true"
+		           android:layout_toRightOf="@id/face"
+		           android:layout_marginLeft="10dp"/>
+	           	
+	            <TextView android:id="@+id/name"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_alignLeft="@id/title"
+	                android:layout_below="@id/title"
+	                android:textSize="14sp"/>
+	            
+	            <TextView android:id="@+id/time"
+	                android:layout_alignBaseline="@id/name"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:textSize="14sp"
+	                android:textColor="?subFontColor"
+	                android:layout_alignParentRight="true"/>
+	       </RelativeLayout>
+	     	<ScrollView 
+			    android:id="@+id/scrollView1"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content">
+		       <pl.droidsonroids.gif.GifTextView android:id="@+id/content"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:paddingLeft="10dp"
+			        android:paddingRight="10dp"
+			        android:paddingTop="5dp"
+			        android:paddingBottom="10dp"
+			        android:textSize="16sp"
+			        android:textColor="?mainFontColor"/>
+			</ScrollView>
+    	</LinearLayout>
+	 <LinearLayout android:layout_width="match_parent"
+           android:layout_height="25dp"
+           android:orientation="horizontal"
+           android:layout_gravity="bottom"
+           android:background="?mainItemBackground">
+           
+           <ImageView android:id="@+id/reply"
+               android:layout_height="18dp"
+               android:layout_width="18dp"
+               android:layout_gravity="center_vertical"
+               android:src="@drawable/article_item_reply"
+               android:contentDescription="@string/article_reply"
+               android:layout_weight="1"/>
+           <ImageView android:id="@+id/forward"
+               android:layout_height="18dp"
+               android:layout_width="18dp"
+               android:layout_gravity="center_vertical"
+               android:src="@drawable/article_item_forward"
+               android:contentDescription="@string/article_forward"
+               android:layout_weight="1"/>
+           
+          <ImageView android:id="@+id/edit"
+               android:layout_height="18dp"
+               android:layout_width="18dp"
+               android:layout_gravity="center_vertical"
+               android:src="@drawable/article_item_edit"
+               android:contentDescription="@string/article_update"
+               android:layout_weight="1"/>
+          <ImageView android:id="@+id/delete"
+               android:layout_height="18dp"
+               android:layout_width="18dp"
+               android:layout_gravity="center_vertical"
+               android:src="@drawable/article_item_deletae"
+               android:contentDescription="@string/article_delete"
+               android:layout_weight="1"/>
+      </LinearLayout>
+</LinearLayout>

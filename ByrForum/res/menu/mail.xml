@@ -1,0 +1,34 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="xzw.szl.byr.assist.MailActivity" >
+    
+     <item
+        android:id="@+id/mail_in"
+        android:orderInCategory="100"
+        android:title="@string/inbox"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/mail_in"/>
+
+     <item
+        android:id="@+id/mail_post"
+        android:orderInCategory="100"
+        android:title="@string/title_activity_postmail"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/write_new_article2"/>
+     
+    <item
+        android:id="@+id/mail_out"
+        android:orderInCategory="100"
+        android:title="@string/outbox"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/mail_out"/>
+    
+    <item
+        android:id="@+id/mail_delete"
+        android:orderInCategory="100"
+        android:title="@string/delbox"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/mail_delete"/>
+
+</menu>

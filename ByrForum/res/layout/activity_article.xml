@@ -1,0 +1,66 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="?mainBackground">
+
+    
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
+	    android:id="@+id/pullToRefreshListView_article"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:background="?mainBackground"
+	    ptr:ptrListViewExtrasEnabled="false"/>
+    
+    
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+        
+        <LinearLayout android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dp"
+            android:paddingLeft="2dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+            
+            
+            <ImageView android:id="@+id/article_face"
+                android:layout_height="25dp"
+                android:layout_width="25dp"
+                android:contentDescription="@string/image_desc"
+                android:src="?faceDrawable"/>
+            
+            <EditText
+                android:id="@+id/article_content"
+                android:hint=""
+                android:background="@drawable/edittext_bk_select"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/grey"/>
+            
+            <ImageView android:id="@+id/article_send"
+                android:layout_height="25dp"
+                android:layout_width="25dp"
+                android:src="?sendDrawable"
+                android:contentDescription="@string/image_desc"/>
+        </LinearLayout>
+        
+        <View android:layout_width="match_parent"
+	               android:layout_height="1dp"
+	               android:background="@android:color/darker_gray"/>
+        <xzw.szl.byr.view.FaceSelectView
+            android:id="@+id/article_face_layout"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+</merge>

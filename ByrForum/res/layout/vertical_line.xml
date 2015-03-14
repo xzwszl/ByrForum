@@ -1,0 +1,5 @@
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/imageView1"
+    android:layout_width="1sp"
+    android:layout_height="match_parent"
+    android:background="@color/user_dialog_item"/>
