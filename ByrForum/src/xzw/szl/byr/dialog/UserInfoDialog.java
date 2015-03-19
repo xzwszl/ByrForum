@@ -108,8 +108,8 @@ public class UserInfoDialog extends Dialog {
 		mFace = (CircleImageView) findViewById(R.id.face);
 		ImageCacheManager2.getInstance().startAcquireImage2(user.getFace_url(),
 				ImageCacheManager2.getFaceImageAcquireListener(mFace, mHandler),
-				DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
-				DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
+				DataUtils.getDisplayValue(ByrBase.FACE_WIDTH,context.getApplicationContext()),
+				DataUtils.getDisplayValue(ByrBase.FACE_WIDTH,context.getApplicationContext()),
 				false);
 	}
 	

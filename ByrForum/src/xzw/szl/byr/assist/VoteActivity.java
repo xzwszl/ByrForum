@@ -101,7 +101,7 @@ public class VoteActivity extends BaseActivity implements OnRefreshListener {
 				AbsListView.LayoutParams.WRAP_CONTENT));
 		tv.setTextColor(getResources().getColor(R.color.light_grey));
 		tv.setGravity(Gravity.CENTER);
-		tv.setMinHeight(DataUtils.getDisplayValue(30));
+		tv.setMinHeight(DataUtils.getDisplayValue(30,getApplicationContext()));
 	//	tv.setBackgroundColor(getResources().getColor(R.color.yellow));
 		tv.setOnClickListener(new View.OnClickListener() {
 			
@@ -225,8 +225,8 @@ public class VoteActivity extends BaseActivity implements OnRefreshListener {
 					if (url != null) 
 						ImageCacheManager2.INSTANCE.startAcquireImage2(url,
 								ImageCacheManager2.getFaceImageAcquireListener(holder.face,mHandler),
-								DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
-								DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
+								DataUtils.getDisplayValue(ByrBase.FACE_WIDTH,getApplicationContext()),
+								DataUtils.getDisplayValue(ByrBase.FACE_WIDTH,getApplicationContext()),
 								false);
 					else
 						holder.face.setImageResource(R.drawable.face_default_m);

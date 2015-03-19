@@ -554,7 +554,8 @@ public class ArticleActivity extends BaseActivity {
 //					if (!isBusy)
 					ImageCacheManager2.INSTANCE.startAcquireImage2(user.getFace_url(),
 							ImageCacheManager2.getFaceImageAcquireListener(holder.face,handler),
-							DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
+							DataUtils.getDisplayValue(ByrBase.FACE_WIDTH,getApplicationContext()),
+							DataUtils.getDisplayValue(ByrBase.FACE_WIDTH,getApplicationContext()),
 							isScrolling);
 				} else {
 					holder.face.setImageResource(R.drawable.face_default_m);
@@ -670,7 +671,7 @@ public class ArticleActivity extends BaseActivity {
 			//holder.ison.setBackgroundColor(Color.BLUE);
 			
 			if (type == 0) {
-				convertView.setPadding(DataUtils.getDisplayValue(10), DataUtils.getDisplayValue(3), DataUtils.getDisplayValue(10), DataUtils.getDisplayValue(25));
+				convertView.setPadding(DataUtils.getDisplayValue(10,getApplicationContext()), DataUtils.getDisplayValue(3,getApplicationContext()), DataUtils.getDisplayValue(10,getApplicationContext()), DataUtils.getDisplayValue(25,getApplicationContext()));
 			}
 			return convertView;
 		}

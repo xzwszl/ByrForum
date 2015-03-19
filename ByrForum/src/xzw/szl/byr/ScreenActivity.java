@@ -4,7 +4,6 @@ package xzw.szl.byr;
 import com.umeng.update.UmengDialogButtonListener;
 import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UmengUpdateListener;
-import com.umeng.update.UpdateDialogActivity;
 import com.umeng.update.UpdateResponse;
 import com.umeng.update.UpdateStatus;
 
@@ -12,17 +11,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.wifi.WifiInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.View;
 import xzw.szl.byr.R;
 import xzw.szl.byr.mananger.ByrThreadPool;
 import xzw.szl.byr.mananger.PrefernceManager;
-import xzw.szl.byr.utils.ByrBase;
 import xzw.szl.byr.utils.DataUtils;
 import xzw.szl.byr.utils.FileUtils;
 import xzw.szl.byr.utils.HttpUtils;
@@ -67,7 +61,7 @@ public class ScreenActivity extends Activity {
 		
 	
 	public void init() {
-		getMetrics();
+//		getMetrics();
 		//					initByrTHreadPool();
 		
 		FileUtils.createDir();
@@ -116,11 +110,7 @@ public class ScreenActivity extends Activity {
 		ByrThreadPool.getTHreadPool().execute(r);
 	}
 	
-	private void getMetrics() {
-		DisplayMetrics metrics = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(metrics);
-		DataUtils.setMetrics(metrics);
-	}
+
 	
 //	private void initByrTHreadPool() {
 //		ByrThreadPool.CreateByrThreadPoll();

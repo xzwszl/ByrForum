@@ -270,7 +270,8 @@ public class HomeFragment extends Fragment{
 		//	holder.love.setText(article.getBoard_name());
 			holder.reply.setText("\t" + article.getReply_count());
 			Drawable drawable = getResources().getDrawable(R.drawable.article_reply);
-			drawable.setBounds(0, 0, DataUtils.getDisplayValue(12), DataUtils.getDisplayValue(12));
+			drawable.setBounds(0, 0, DataUtils.getDisplayValue(12,getActivity().getApplicationContext()), 
+					DataUtils.getDisplayValue(12 ,getActivity().getApplicationContext()));
 			holder.reply.setCompoundDrawables(drawable,null,null, null);
 			
 			holder.love.setOnClickListener(new View.OnClickListener() {

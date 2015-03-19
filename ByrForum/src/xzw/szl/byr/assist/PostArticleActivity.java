@@ -172,17 +172,17 @@ public class PostArticleActivity extends BaseActivity implements View.OnClickLis
 	private void addView(final String path) {
 		mLayout.setVisibility(View.VISIBLE);
 		final ImageView iv = new ImageView(this);
-		Bitmap bitmap = ImageUtils.compressImage(path,DataUtils.getDisplayValue(50),DataUtils.getDisplayValue(50));
+		Bitmap bitmap = ImageUtils.compressImage(path,DataUtils.getDisplayValue(50,getApplicationContext()),DataUtils.getDisplayValue(50,getApplicationContext()));
 		//bitmap = ImageUtils.compressImage(bitmap, 100, 0);
 		if (bitmap == null) 
 			iv.setImageResource(R.drawable.ordfile);
 		else iv.setImageBitmap(bitmap);
 		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		iv.setMinimumHeight(DataUtils.getDisplayValue(50));
-		iv.setMaxHeight(DataUtils.getDisplayValue(50));
-		iv.setMaxWidth(DataUtils.getDisplayValue(50));
+		iv.setMinimumHeight(DataUtils.getDisplayValue(50,getApplicationContext()));
+		iv.setMaxHeight(DataUtils.getDisplayValue(50,getApplicationContext()));
+		iv.setMaxWidth(DataUtils.getDisplayValue(50,getApplicationContext()));
 		
-		iv.setPadding(0, 0, DataUtils.getDisplayValue(5), 0);
+		iv.setPadding(0, 0, DataUtils.getDisplayValue(5,getApplicationContext()), 0);
 		iv.setLayoutParams(params);
 		iv.setOnClickListener(new View.OnClickListener() {
 			

@@ -218,13 +218,15 @@ public class MailDetailActivity extends BaseDetailActivity implements OnClickLis
 			
 			ImageCacheManager2.INSTANCE.startAcquireImage2(mMail.getUser().getFace_url(),
 					ImageCacheManager2.getFaceImageAcquireListener(mFace, handler),
-					DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
-					DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
+					DataUtils.getDisplayValue(ByrBase.FACE_WIDTH,getApplicationContext()),
+					DataUtils.getDisplayValue(ByrBase.FACE_WIDTH,getApplicationContext()),
 					false);
 		}
 		
 		CharSequence sequence = Html.fromHtml(DataUtils.getHtmlFromString(mMail.getContent(),mMail.getAttachment()), 
-				new URLImageGetter((GifTextView)mGif, this, mMail.getAttachment(), handler,DataUtils.getScreenWidth(),DataUtils.getScreenHeight()), 
+				new URLImageGetter((GifTextView)mGif, this, mMail.getAttachment(), handler,
+						DataUtils.getScreenWidth(getApplicationContext()),
+						DataUtils.getScreenHeight(getApplicationContext())), 
 				new MyTagHandler(this, mMail.getAttachment()));
 		if (mMail.getContent().contains("[em")) {
 			mGif.setCompoundDrawablesWithIntrinsicBounds(

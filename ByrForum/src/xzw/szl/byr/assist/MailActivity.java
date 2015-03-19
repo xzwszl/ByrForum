@@ -504,8 +504,8 @@ public class MailActivity extends BaseActivity implements OnRefreshListener{
 				}
 				ImageCacheManager2.INSTANCE.startAcquireImage2(mail.getUser().getFace_url(), 
 						getFaceImageAcquireListener(holder.face),
-						DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
-						DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
+						DataUtils.getDisplayValue(ByrBase.FACE_WIDTH,getApplicationContext()),
+						DataUtils.getDisplayValue(ByrBase.FACE_WIDTH,getApplicationContext()),
 						false);
 				
 			} else {
@@ -573,7 +573,7 @@ public class MailActivity extends BaseActivity implements OnRefreshListener{
 		tv.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
 		tv.setTextColor(getResources().getColor(R.color.light_grey));
 		tv.setGravity(Gravity.CENTER);
-		tv.setPadding(0, DataUtils.getDisplayValue(10), 0, DataUtils.getDisplayValue(10));
+		tv.setPadding(0, DataUtils.getDisplayValue(10,getApplicationContext()), 0, DataUtils.getDisplayValue(10,getApplicationContext()));
 		tv.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

@@ -247,7 +247,7 @@ public class BoardActivity extends BaseActivity{
 			if (drawable == null) { 
 				drawable = getResources().getDrawable(R.drawable.board_user);
 			}
-			drawable.setBounds(0, 0, DataUtils.getDisplayValue(12),DataUtils.getDisplayValue(12));
+			drawable.setBounds(0, 0, DataUtils.getDisplayValue(12,getApplicationContext()),DataUtils.getDisplayValue(12,getApplicationContext()));
 			viewHolder.authName.setCompoundDrawables(drawable, null, null, null);
 			
 			viewHolder.article.setText(article.getTitle());
@@ -278,7 +278,7 @@ public class BoardActivity extends BaseActivity{
 			
 			viewHolder.reply.setText(article.getReply_count()+"");
 			drawable = getResources().getDrawable(R.drawable.article_reply);
-			drawable.setBounds(0, 0, DataUtils.getDisplayValue(12),DataUtils.getDisplayValue(12));
+			drawable.setBounds(0, 0, DataUtils.getDisplayValue(12,getApplicationContext()),DataUtils.getDisplayValue(12,getApplicationContext()));
 			viewHolder.reply.setCompoundDrawables(drawable, null, null, null);
 			
 			return convertView;

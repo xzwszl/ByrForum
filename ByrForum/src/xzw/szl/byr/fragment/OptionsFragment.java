@@ -302,8 +302,8 @@ public class OptionsFragment extends Fragment{
 			drawable = getResources().getDrawable(mItems[position]);
 			drawable.setBounds(0, 0,drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
 			holder.text.setCompoundDrawables(null, drawable, null, null);
-			holder.text.setCompoundDrawablePadding(DataUtils.getDisplayValue(3));
-			holder.text.setPadding(0,DataUtils.getDisplayValue(3),0,DataUtils.getDisplayValue(3));
+			holder.text.setCompoundDrawablePadding(DataUtils.getDisplayValue(3,getActivity().getApplicationContext()));
+			holder.text.setPadding(0,DataUtils.getDisplayValue(3,getActivity().getApplicationContext()),0,DataUtils.getDisplayValue(3,getActivity().getApplicationContext()));
 			holder.text.setGravity(Gravity.CENTER);
 			if (ViewUtils.isDayTheme) {
 				holder.text.setBackgroundColor(getResources().getColor(R.color.daymainitembk));
@@ -439,7 +439,7 @@ public class OptionsFragment extends Fragment{
 //				    		getResources().getColor(R.color.yellow));
 			} else {
 				Drawable drawable = getResources().getDrawable(R.drawable.add_favor);
-				drawable.setBounds(0, 0, DataUtils.getDisplayValue(20),DataUtils.getDisplayValue(20));
+				drawable.setBounds(0, 0, DataUtils.getDisplayValue(20,getActivity().getApplicationContext()),DataUtils.getDisplayValue(20,getActivity().getApplicationContext()));
 				holder.tv.setCompoundDrawables(drawable, null, null, null);
 				if (ViewUtils.isDayTheme) {
 					 ((View)holder.tv.getParent()).setBackgroundColor(

@@ -166,7 +166,7 @@ public class ReferActivity extends BaseActivity implements OnRefreshListener{
 			TextView tv = new TextView(this);
 			tv.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
 			tv.setGravity(Gravity.CENTER);
-			tv.setPadding(0, DataUtils.getDisplayValue(10), 0, DataUtils.getDisplayValue(10));
+			tv.setPadding(0, DataUtils.getDisplayValue(10,getApplicationContext()), 0, DataUtils.getDisplayValue(10,getApplicationContext()));
 			tv.setTextColor(getResources().getColor(R.color.light_grey));
 			tv.setOnClickListener(new View.OnClickListener() {
 				
@@ -384,8 +384,8 @@ public class ReferActivity extends BaseActivity implements OnRefreshListener{
 						
 						ImageCacheManager2.getInstance().startAcquireImage2(user.getFace_url(),
 								ImageCacheManager2.getFaceImageAcquireListener(holder.face, mHandler),
-								DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
-								DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
+								DataUtils.getDisplayValue(ByrBase.FACE_WIDTH,getApplicationContext()),
+								DataUtils.getDisplayValue(ByrBase.FACE_WIDTH,getApplicationContext()),
 								false);
 					}
 				}

@@ -17,16 +17,20 @@ public class RadioTextView extends TextView{
 	private int color = getResources().getColor(R.color.radio_blue);
 	Paint paint = new Paint();
 	private int ordinary;
+	private Context context;
 	public RadioTextView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+		this.context = context;
 	}
 	
 	public RadioTextView(Context context, AttributeSet attrs)  {
 		super(context, attrs);
+		this.context = context;
 	}
 	
 	public RadioTextView(Context context) {
 		super(context);
+		this.context = context;
 	}
 	
 	public void setChecked(boolean isChecked) {
@@ -62,7 +66,7 @@ public class RadioTextView extends TextView{
 		
 		
 		paint.setStyle(Style.STROKE);
-		float w = DataUtils.getDisplayValue(1);
+		float w = DataUtils.getDisplayValue(1,context.getApplicationContext());
 		paint.setStrokeWidth(w);
 		
 		if (isChecked || isEnd) {

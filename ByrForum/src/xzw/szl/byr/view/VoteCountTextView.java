@@ -16,18 +16,21 @@ public class VoteCountTextView extends TextView{
 	private float round;
 	private int color = 0;
 	Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-	
+	private Context context;
 	
 	public VoteCountTextView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+		this.context = context;
 	}
 	
 	public VoteCountTextView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		this.context = context;
 	}
 	
 	public VoteCountTextView(Context context) {
 		super(context);
+		this.context = context;
 	}
 	
 	public void setCount(int count) {
@@ -48,7 +51,7 @@ public class VoteCountTextView extends TextView{
 		
 		
 		if (color != 0) {
-			int width = getWidth() - DataUtils.getDisplayValue(75);
+			int width = getWidth() - DataUtils.getDisplayValue(75,context.getApplicationContext());
 			int height = getHeight();
 			
 			
@@ -61,7 +64,7 @@ public class VoteCountTextView extends TextView{
 			paint.setColor(Color.BLACK);
 			
 			
-			paint.setTextSize(DataUtils.getDisplayValue(12));
+			paint.setTextSize(DataUtils.getDisplayValue(12,context.getApplicationContext()));
 			FontMetricsInt fontMetrics = paint.getFontMetricsInt();
 			
 			//paint.setAntiAlias(false);

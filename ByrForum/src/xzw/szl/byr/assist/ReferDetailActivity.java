@@ -209,13 +209,15 @@ public class ReferDetailActivity extends BaseDetailActivity implements OnClickLi
 			
 			ImageCacheManager2.INSTANCE.startAcquireImage2(mArticle.getUser().getFace_url(),
 					ImageCacheManager2.getFaceImageAcquireListener(mFace, handler),
-					DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
-					DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
+					DataUtils.getDisplayValue(ByrBase.FACE_WIDTH,getApplicationContext()),
+					DataUtils.getDisplayValue(ByrBase.FACE_WIDTH,getApplicationContext()),
 					false);
 		}
 		
 		CharSequence sequence = Html.fromHtml(DataUtils.getHtmlFromString(mArticle.getContent(),mArticle.getAttachment()), 
-				new URLImageGetter((GifTextView)mGif, this, mArticle.getAttachment(), handler,DataUtils.getScreenWidth(),DataUtils.getScreenHeight()), 
+				new URLImageGetter((GifTextView)mGif, this, mArticle.getAttachment(), handler,
+						DataUtils.getScreenWidth(getApplicationContext()),
+						DataUtils.getScreenHeight(getApplicationContext())), 
 				new MyTagHandler(this, mArticle.getAttachment()));
 		if (mArticle.getContent().contains("[em")) {
 			mGif.setCompoundDrawablesWithIntrinsicBounds(

@@ -7,10 +7,12 @@ import java.util.Stack;
 
 import xzw.szl.byr.info.Attachment;
 
+import android.content.Context;
 import android.os.Environment;
-import android.text.BoringLayout.Metrics;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 public class DataUtils {
 	
@@ -22,10 +24,7 @@ public class DataUtils {
 	private static SimpleDateFormat  simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS",Locale.CHINA);
 	private static Date date = new Date();
 	private static DisplayMetrics metrics;
-	
-	public static void setMetrics(DisplayMetrics tempmetrics) {
-		metrics = tempmetrics;
-	}
+
 	public static String getBase64(String str) {
 		return Base64.encodeToString(str.getBytes(), Base64.DEFAULT);	
 	}
@@ -68,7 +67,7 @@ public class DataUtils {
 	//
 	public static String getHtmlFromString(String str,Attachment att) {
 		
-		
+		if (TextUtils.isEmpty(str)) return "";
 		int attSize = att==null ?0:att.getFile().size();
 		boolean [] usedArray = null;
 		if (attSize > 0) {
@@ -505,18 +504,31 @@ public class DataUtils {
 		return sb.toString();
 	}
 	
-	public static int getDisplayValue(int sp) {
-		if (metrics != null)
-			return Math.round(sp * metrics.density);
-		return sp;
+	public static int getDisplayValue(int sp,Context context) {
+		
+		if (metrics == null) {
+			metrics = getMetrics(context);
+		}
+		
+		return Math.round(sp * metrics.density);
 	}
 	
-	public static int getScreenWidth() {
+	public static int getScreenWidth(Context context) {
+		
+		if (metrics == null) metrics = getMetrics(context);
 		return metrics.widthPixels;
 	}
 	
-	public static int getScreenHeight() {
+	public static int getScreenHeight(Context context) {
+		if (metrics == null) metrics = getMetrics(context);
 		return metrics.heightPixels;
+	}
+	
+	private static  DisplayMetrics getMetrics(Context context) {
+		DisplayMetrics metrics = new DisplayMetrics();
+		WindowManager windowManager =  (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		windowManager.getDefaultDisplay().getMetrics(metrics);
+		return metrics;
 	}
 	
 	//替换第num个key的值
