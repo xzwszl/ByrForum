@@ -14,7 +14,8 @@ import xzw.szl.byr.info.ByrVote;
 import xzw.szl.byr.info.Pagination;
 import xzw.szl.byr.info.Vote;
 import xzw.szl.byr.mananger.ByrThreadPool;
-import xzw.szl.byr.mananger.ImageCacheManager;
+import xzw.szl.byr.mananger.ImageCacheManager2;
+import xzw.szl.byr.utils.ByrBase;
 import xzw.szl.byr.utils.DataUtils;
 import xzw.szl.byr.utils.HttpUtils;
 import xzw.szl.byr.utils.JsonUtils;
@@ -222,7 +223,11 @@ public class VoteActivity extends BaseActivity implements OnRefreshListener {
 					
 					String url = vote.getUser().getFace_url();
 					if (url != null) 
-						ImageCacheManager.INSTANCE.startAcquireImage(url,ImageCacheManager.getFaceImageAcquireListener(holder.face,mHandler));
+						ImageCacheManager2.INSTANCE.startAcquireImage2(url,
+								ImageCacheManager2.getFaceImageAcquireListener(holder.face,mHandler),
+								DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
+								DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
+								false);
 					else
 						holder.face.setImageResource(R.drawable.face_default_m);
 					
@@ -234,6 +239,7 @@ public class VoteActivity extends BaseActivity implements OnRefreshListener {
 						holder.id.setTextColor(getResources().getColor(R.color.dark_blue));
 					}
 				}
+				
 				holder.title.setText(vote.getTitle());
 				
 				if (!vote.isIs_end()) {

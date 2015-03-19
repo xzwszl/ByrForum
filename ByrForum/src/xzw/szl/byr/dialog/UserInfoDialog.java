@@ -3,16 +3,14 @@ package xzw.szl.byr.dialog;
 import xzw.szl.byr.R;
 import xzw.szl.byr.assist.PostMailActivity;
 import xzw.szl.byr.info.User;
-import xzw.szl.byr.mananger.ImageCacheManager;
+import xzw.szl.byr.mananger.ImageCacheManager2;
+import xzw.szl.byr.utils.ByrBase;
 import xzw.szl.byr.utils.DataUtils;
-import xzw.szl.byr.utils.ViewUtils;
 import xzw.szl.byr.view.CircleImageView;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
-import android.provider.ContactsContract.Contacts.Data;
-import android.sax.StartElementListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,7 +106,11 @@ public class UserInfoDialog extends Dialog {
 		});
 		
 		mFace = (CircleImageView) findViewById(R.id.face);
-		ImageCacheManager.getInstance().startAcquireImage(user.getFace_url(), ImageCacheManager.getFaceImageAcquireListener(mFace, mHandler));
+		ImageCacheManager2.getInstance().startAcquireImage2(user.getFace_url(),
+				ImageCacheManager2.getFaceImageAcquireListener(mFace, mHandler),
+				DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
+				DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
+				false);
 	}
 	
 	

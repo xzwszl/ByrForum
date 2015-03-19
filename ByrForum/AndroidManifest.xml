@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="xzw.szl.byr"
-    android:versionCode="4"
-    android:versionName="1.1.1">
+    android:versionCode="5"
+    android:versionName="1.1.2">
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -153,7 +153,7 @@
         
         <service android:name=".service.BroadcastService"></service>
         
-        <meta-data android:value="yourkey" android:name="UMENG_APPKEY"/>
+        <meta-data android:value="54fdb951fd98c595c300075d" android:name="UMENG_APPKEY"/>
 		<meta-data android:value="Wandoujia" android:name="UMENG_CHANNEL"/>
 		
 		<service

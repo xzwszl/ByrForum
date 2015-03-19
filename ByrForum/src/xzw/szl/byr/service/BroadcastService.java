@@ -5,7 +5,6 @@ import xzw.szl.byr.assist.MailActivity;
 import xzw.szl.byr.assist.ReferActivity;
 import xzw.szl.byr.info.Count;
 import xzw.szl.byr.info.Mailbox;
-import xzw.szl.byr.info.Refer;
 import xzw.szl.byr.mananger.ByrThreadPool;
 import xzw.szl.byr.mananger.PrefernceManager;
 import xzw.szl.byr.utils.HttpUtils;
@@ -29,12 +28,13 @@ import android.os.Message;
 public class BroadcastService extends Service{
 
 	public static final String BR_INFO = "byr.info.broadcast";
-	private Intent intent = new Intent(BR_INFO);
 	
 	private Handler mHanlder = new BroadHandler(){
 
 		@Override
 		public void handleMessage(Message msg) {
+			
+			Intent intent = new Intent(BR_INFO);
 			switch (msg.what) {
 			case 0:
 				Mailbox mb = (Mailbox) msg.obj;

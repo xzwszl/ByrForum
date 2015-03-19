@@ -230,7 +230,6 @@ public class HomeActivity extends BaseActivity {
 		case R.id.logout:
 			logout();
 			break;
-
 		default:
 			break;
 		}

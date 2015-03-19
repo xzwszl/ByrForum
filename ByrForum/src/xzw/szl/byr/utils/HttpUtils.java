@@ -18,6 +18,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
@@ -48,6 +49,7 @@ import xzw.szl.byr.info.VoteDetail;
 import xzw.szl.byr.mananger.PrefernceManager;
 import android.content.Context;
 import android.os.Environment;
+import android.util.Log;
 public class HttpUtils{
 	
 	private static final String SERVICE_FAILED = "服务失效,请求失败";
@@ -63,28 +65,36 @@ public class HttpUtils{
 		schReg.register(new Scheme("https",SSLSocketFactory.getSocketFactory(), 443));
 		
 		HttpParams params = getHttpParams();
+		
 		//线程安全的连接管理
 		ClientConnectionManager manager = new ThreadSafeClientConnManager(getHttpParams(),schReg);
 		return new DefaultHttpClient(manager,params);
 	}
 	
 	
-	public static HttpClient getHttpClient() {
+	public static synchronized HttpClient getHttpClient() {
 		
 		if (httpClient  == null) {
 			httpClient = createHttpClient();
-			if (((DefaultHttpClient)httpClient).getCredentialsProvider() == null)
-				setBasicCredentitalsProvider(PrefernceManager.getInstance().getCurrentUserName(context), 
-						PrefernceManager.getInstance().getCurrentUserPassword(context));
+			
+			BasicCredentialsProvider bcp = basicAuth(
+					PrefernceManager.getInstance().getCurrentUserName(context),
+					PrefernceManager.getInstance().getCurrentUserPassword(context));
+			
+			((DefaultHttpClient)httpClient).setCredentialsProvider(bcp);
 		}
 		return httpClient;
 	}
 	
 	public static void shutdownHttpClient () {
-		if (httpClient != null && httpClient.getConnectionManager() != null) {
-			httpClient.getConnectionManager().shutdown();
-			httpClient = null;
+		
+		synchronized (HttpUtils.class) {
+			if (httpClient != null && httpClient.getConnectionManager() != null) {
+				httpClient.getConnectionManager().shutdown();
+				httpClient = null;
+			}
 		}
+		
 	}
 	
 	public static void setBasicCredentitalsProvider(String account, String password) {
@@ -122,7 +132,7 @@ public class HttpUtils{
 		HttpGet httpGet = new HttpGet(ByrBase.BASE_URL + url);
 		
 		try {
-			HttpResponse httpResponse = httpClient.execute(httpGet);
+			HttpResponse httpResponse = getHttpClient().execute(httpGet);
 			
 			int status = httpResponse.getStatusLine().getStatusCode();
 			
@@ -168,18 +178,13 @@ public class HttpUtils{
 	
 	public static void httpRequest(String url,HttpRequestListener listener) { 
 		
-		
-		HttpClient httpClient = getHttpClient();
-//		
-//	    ((DefaultHttpClient) httpClient).setCredentialsProvider(bcp);
-//	    ((DefaultHttpClient) httpClient).setParams(getHttpParams());
-		
-		
 		try {
 			
 			HttpGet httpGet = new HttpGet(ByrBase.BASE_URL+ getRealUrl(url));
-			HttpResponse httpResponse = httpClient.execute(httpGet);
-			
+			HttpResponse httpResponse = null;
+				
+			httpResponse = getHttpClient().execute(httpGet);
+				
 			int status = httpResponse.getStatusLine().getStatusCode();
 			
 			if (status == HttpStatus.SC_OK) {
@@ -193,25 +198,29 @@ public class HttpUtils{
 				}
 			} else {
 				listener.onFailed(SERVICE_FAILED);
+				httpResponse.getEntity().getContent().close();
+				
+				Log.e("Failed","---------------" + status + "-----------------");
 			}
+			
+//			httpGet.abort();
+			
+			
+			
 		} catch (ClientProtocolException e) {
-			listener.onError(e);
+			Log.e("ClientProtocolException",e.getMessage());
+//			listener.onError(e);
 		} catch (IOException e) {
+			Log.e("IOException",e.getMessage());
 			listener.onError(e);
 		}
 	}
 	
 	public static void getBitmap(String url) { 
-		
-		HttpClient httpClient = getHttpClient();
-//		
-//	    ((DefaultHttpClient) httpClient).setCredentialsProvider(bcp);
-//	    ((DefaultHttpClient) httpClient).setParams(getHttpParams());
-
 		try {
 
 			HttpGet httpGet = new HttpGet(getRealUrl(convertURL(url)));
-			HttpResponse httpResponse = httpClient.execute(httpGet);
+			HttpResponse httpResponse = getHttpClient().execute(httpGet);
 			
 			int status = httpResponse.getStatusLine().getStatusCode();
 			
@@ -226,6 +235,7 @@ public class HttpUtils{
 				ImageUtils.downloadImagetoSD(httpResponse.getEntity().getContent(),url);
 //				return bitmap;	
 			} else {
+				httpResponse.getEntity().getContent().close();
 				return;
 			}
 		} catch (ClientProtocolException e) {
@@ -238,13 +248,6 @@ public class HttpUtils{
 	}
 	
 	public static void getPicture(String url,String type,OnPicitureDownloadListener listener,int start) { 
-		
-		HttpClient httpClient = getHttpClient();
-//		
-//	    ((DefaultHttpClient) httpClient).setCredentialsProvider(bcp);
-//	    ((DefaultHttpClient) httpClient).setParams(getHttpParams());
-		
-	
 		HttpGet httpGet = new HttpGet(getRealUrl(convertURL(url)));
 		httpGet.addHeader("Range", "bytes=" + start);
 		
@@ -252,7 +255,7 @@ public class HttpUtils{
 			
 			HttpResponse httpResponse;
 			try {
-				httpResponse = httpClient.execute(httpGet);
+				httpResponse = getHttpClient().execute(httpGet);
 			} catch (IOException e) {
 				listener.onRefreshDownloadState(OnPicitureDownloadListener.DOWNLOAD_ERROR);
 				return;
@@ -298,6 +301,7 @@ public class HttpUtils{
 				listener.onRefreshDownloadState(OnPicitureDownloadListener.DOWNLOADED);
 				listener.onUpdateDownloadProgress(count,total);
 			} else {
+				httpResponse.getEntity().getContent().close();
 				listener.onRefreshDownloadState(OnPicitureDownloadListener.DOWNLOAD_ERROR);
 			}
 		} catch (ClientProtocolException e) {
@@ -312,7 +316,7 @@ public class HttpUtils{
 	public static BasicCredentialsProvider basicAuth(String username,String password) {
 		
 		UsernamePasswordCredentials upc = new UsernamePasswordCredentials(username,password);
-		AuthScope as = new AuthScope(null,-1);
+		AuthScope as = new AuthScope(AuthScope.ANY_HOST,AuthScope.ANY_PORT);
 		
 		BasicCredentialsProvider bcp = new BasicCredentialsProvider();
 		bcp.setCredentials(as, upc);
@@ -338,7 +342,6 @@ public class HttpUtils{
 		else
 			url = ByrBase.BASE_URL + "/article/" + name + "/" +id +".json";
 		HttpPost httpPost = new HttpPost(getRealUrl(url));
-		HttpClient httpClient = getHttpClient();
 		
 		List<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
 		params.add(new BasicNameValuePair("title", title));
@@ -350,7 +353,7 @@ public class HttpUtils{
 			HttpEntity httpEntity = new UrlEncodedFormEntity(params,HTTP.UTF_8);
 			httpPost.setEntity(httpEntity);
 			
-			HttpResponse httpResponse = httpClient.execute(httpPost);
+			HttpResponse httpResponse = getHttpClient().execute(httpPost);
 			
 			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 
@@ -368,6 +371,8 @@ public class HttpUtils{
 					requestListener.onFailed(error.getMsg());
 				}
 			} else {
+				httpResponse.getEntity().getContent().close();
+
 				requestListener.onFailed(SERVICE_FAILED);
 			}
 			
@@ -387,8 +392,6 @@ public class HttpUtils{
 		String url = ByrBase.BASE_URL + "/article/" + boardname + "/forward/" + id + ".json";
 		
 		HttpPost httpPost = new HttpPost(getRealUrl(url));
-		HttpClient httpClient = getHttpClient();
-//		((DefaultHttpClient) httpClient).setCredentialsProvider(bcp);
 		
 		List<NameValuePair> namePairs = new ArrayList<NameValuePair>();
 		namePairs.add(new BasicNameValuePair("threads", params[0]));
@@ -399,7 +402,7 @@ public class HttpUtils{
 		try {
 			HttpEntity httpEntity = new UrlEncodedFormEntity(namePairs,HTTP.UTF_8);
 			httpPost.setEntity(httpEntity);
-			HttpResponse httpResponse = httpClient.execute(httpPost);
+			HttpResponse httpResponse = getHttpClient().execute(httpPost);
 			
 			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				
@@ -411,6 +414,8 @@ public class HttpUtils{
 					listener.onFailed(error.getMsg());
 				}
 			} else {
+				httpResponse.getEntity().getContent().close();
+
 				listener.onFailed(SERVICE_FAILED);
 			}
 			
@@ -431,11 +436,6 @@ public class HttpUtils{
 		
 		HttpPost  httpPost = new HttpPost(getRealUrl(url));
 		
-		HttpClient httpClient = getHttpClient();
-//		httpClient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
-//		((DefaultHttpClient)httpClient).setCredentialsProvider(bcp);
-		
-		
 		File file = new File(filepath);
 		if (file.exists()) {
 			MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.STRICT);
@@ -443,7 +443,7 @@ public class HttpUtils{
 			httpPost.setEntity(multipartEntity);
 			HttpResponse httpResponse;
 			try {
-				httpResponse = httpClient.execute(httpPost);
+				httpResponse = getHttpClient().execute(httpPost);
 				if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 					
 					String js = EntityUtils.toString(httpResponse.getEntity());
@@ -454,6 +454,8 @@ public class HttpUtils{
 						listener.onFailed(error.getMsg());
 					}
 				} else {
+					httpResponse.getEntity().getContent().close();
+
 					listener.onFailed(SERVICE_FAILED);
 				}
 			} catch (ClientProtocolException e) {
@@ -469,11 +471,8 @@ public class HttpUtils{
 		String url = ByrBase.BASE_URL + "/attachment/" + boardName + "/delete/" + id + ".json";
 		
 		HttpPost httpPost = new HttpPost(getRealUrl(url));
-		HttpClient httpClient = getHttpClient();
-//		((DefaultHttpClient) httpClient).setCredentialsProvider(bcp);
-//		
 		try {
-			HttpResponse httpResponse = httpClient.execute(httpPost);
+			HttpResponse httpResponse = getHttpClient().execute(httpPost);
 			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				
 				String js = EntityUtils.toString(httpResponse.getEntity());
@@ -484,6 +483,8 @@ public class HttpUtils{
 					listener.onFailed(error.getMsg());
 				}
 			} else {
+				httpResponse.getEntity().getContent().close();
+
 				listener.onFailed(SERVICE_FAILED);
 			}
 		} catch ( ClientProtocolException e) {
@@ -496,11 +497,8 @@ public class HttpUtils{
 	public static void deleteArticle (String name, int id,HttpRequestListener listener) {
 		String url = ByrBase.BASE_URL + "/article/" + name + "/delete/" + id + ".json";
 		HttpPost httpPost = new HttpPost(getRealUrl(url));
-		HttpClient httpClient = getHttpClient();
-//		((DefaultHttpClient)httpClient).setCredentialsProvider(bcp);
-		
 		try {
-			HttpResponse httpResponse = httpClient.execute(httpPost);
+			HttpResponse httpResponse = getHttpClient().execute(httpPost);
 			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				String js = EntityUtils.toString(httpResponse.getEntity());
 				RequestError error = (RequestError) JsonUtils.toBean(js, RequestError.class);
@@ -510,6 +508,8 @@ public class HttpUtils{
 					listener.onFailed(error.getMsg());
 				}
 			} else {
+				httpResponse.getEntity().getContent().close();
+
 				listener.onFailed(SERVICE_FAILED);
 			}
 		} catch (ClientProtocolException e) {
@@ -523,10 +523,6 @@ public class HttpUtils{
 		
 		String url = ByrBase.BASE_URL + "/vote/" + voteid + ".json";
 		HttpPost httpPost = new HttpPost(getRealUrl(url));
-		HttpClient httpClient = getHttpClient();
-//		((DefaultHttpClient) httpClient).setCredentialsProvider(bcp);
-		
-		
 		List<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
 		
 		int len = votes.size();
@@ -543,7 +539,7 @@ public class HttpUtils{
 			
 			HttpEntity httpEntity = new UrlEncodedFormEntity(params,HTTP.UTF_8);
 			httpPost.setEntity(httpEntity);
-			HttpResponse httpResponse = httpClient.execute(httpPost);
+			HttpResponse httpResponse = getHttpClient().execute(httpPost);
 			
 			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				String js = EntityUtils.toString(httpResponse.getEntity());
@@ -554,6 +550,8 @@ public class HttpUtils{
 					listener.onFailed(error.getMsg());
 				}
 			} else {
+				httpResponse.getEntity().getContent().close();
+
 				listener.onFailed(SERVICE_FAILED);
 			}
 			
@@ -575,13 +573,11 @@ public class HttpUtils{
 		params.add(new BasicNameValuePair("content",content));
 		
 		HttpPost httpPost = new HttpPost(getRealUrl(url));
-			
-		HttpClient httpClient = getHttpClient();
 
 		try {
 			HttpEntity httpEntity = new UrlEncodedFormEntity(params,HTTP.UTF_8);
 			httpPost.setEntity(httpEntity);
-			HttpResponse httpResponse = httpClient.execute(httpPost);
+			HttpResponse httpResponse = getHttpClient().execute(httpPost);
 			
 			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				
@@ -594,6 +590,8 @@ public class HttpUtils{
 					listener.onFailed(error.getMsg());
 				}
 			} else {
+				httpResponse.getEntity().getContent().close();
+
 				listener.onFailed(SERVICE_FAILED);
 			}
 		} catch (UnsupportedEncodingException e) {
@@ -610,10 +608,8 @@ public class HttpUtils{
 		String url = ByrBase.BASE_URL + "/mail/" + box + "/delete/" + num + ".json";
 		
 		HttpPost httpPost = new HttpPost(getRealUrl(url));
-		HttpClient httpClient = getHttpClient();
-		
 		try {
-			HttpResponse httpResponse = httpClient.execute(httpPost);
+			HttpResponse httpResponse = getHttpClient().execute(httpPost);
 			
 			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				String js = EntityUtils.toString(httpResponse.getEntity());
@@ -624,6 +620,8 @@ public class HttpUtils{
 					listener.onFailed(error.getMsg());
 				}
 			} else {
+				httpResponse.getEntity().getContent().close();
+
 				listener.onFailed(SERVICE_FAILED);
 			}
 		} catch (ClientProtocolException e) {
@@ -646,9 +644,7 @@ public class HttpUtils{
 			HttpEntity httpEntity = new UrlEncodedFormEntity(params,HTTP.UTF_8);
 			httpPost.setEntity(httpEntity);
 			
-			HttpClient httpClient = getHttpClient();
-			
-			HttpResponse httpResponse = httpClient.execute(httpPost);
+			HttpResponse httpResponse = getHttpClient().execute(httpPost);
 			
 			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				String js = EntityUtils.toString(httpResponse.getEntity());
@@ -659,6 +655,8 @@ public class HttpUtils{
 					listener.onFailed(error.getMsg());
 				}
 			} else {
+				httpResponse.getEntity().getContent().close();
+
 				listener.onFailed(SERVICE_FAILED);
 			}
 			
@@ -681,13 +679,11 @@ public class HttpUtils{
 		params.add(new BasicNameValuePair("content",content));
 		
 		HttpPost httpPost = new HttpPost(getRealUrl(url));
-			
-		HttpClient httpClient = getHttpClient();
 
 		try {
 			HttpEntity httpEntity = new UrlEncodedFormEntity(params,HTTP.UTF_8);
 			httpPost.setEntity(httpEntity);
-			HttpResponse httpResponse = httpClient.execute(httpPost);
+			HttpResponse httpResponse = getHttpClient().execute(httpPost);
 			
 			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				
@@ -700,6 +696,8 @@ public class HttpUtils{
 					listener.onFailed(error.getMsg());
 				}
 			}  else {
+				httpResponse.getEntity().getContent().close();
+
 				listener.onFailed(SERVICE_FAILED);
 			}
 		} catch (UnsupportedEncodingException e) {
@@ -738,6 +736,8 @@ public class HttpUtils{
 					listener.onFailed(error.getMsg());
 				}
 			}  else {
+				httpResponse.getEntity().getContent().close();
+
 				listener.onFailed(SERVICE_FAILED);
 			}
 		} catch (UnsupportedEncodingException e) {
@@ -771,6 +771,8 @@ public class HttpUtils{
 					listener.onFailed(error.getMsg());
 				}
 			}  else {
+				httpResponse.getEntity().getContent().close();
+
 				listener.onFailed(SERVICE_FAILED);
 			}
 		} catch (UnsupportedEncodingException e) {
@@ -802,6 +804,8 @@ public class HttpUtils{
 					listener.onFailed(error.getMsg());
 				}
 			}  else {
+				httpResponse.getEntity().getContent().close();
+
 				listener.onFailed(SERVICE_FAILED);
 			}
 		} catch (UnsupportedEncodingException e) {

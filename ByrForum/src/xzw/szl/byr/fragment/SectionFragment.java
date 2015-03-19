@@ -46,7 +46,7 @@ public class SectionFragment extends Fragment{
 	private boolean isChangebySelf = false; // if others makes the map change,then this field is false;
 	private  Handler mHandler;
 	private Dialog mDialog;
-	private String group = "{\"section_count\":10,\"section\":[" +
+	private final String group = "{\"section_count\":10,\"section\":[" +
 			"{\"name\":\"0\",\"description\":\"本站站务\",\"is_root\":true}," +
 			"{\"name\":\"1\",\"description\":\"北邮校园\",\"is_root\":true}," +
 			"{\"name\":\"2\",\"description\":\"学术科技\",\"is_root\":true}," +

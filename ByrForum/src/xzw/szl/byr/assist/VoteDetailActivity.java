@@ -58,7 +58,7 @@ public class VoteDetailActivity extends BaseDetailActivity{
 	private boolean isDay = true;
 	
 	private Handler mHandler;
-	private ProgressDialog mProgressDialog;
+//	private ProgressDialog mProgressDialog;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -102,7 +102,7 @@ public class VoteDetailActivity extends BaseDetailActivity{
 		
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
-		mProgressDialog = ProgressDialog.show(this,"",getString(R.string.loading_hard));
+//		mProgressDialog = ProgressDialog.show(this,"",getString(R.string.loading_hard));
 		
 		mHandler = new VoteDetailHandler(this);
 		
@@ -465,7 +465,7 @@ public class VoteDetailActivity extends BaseDetailActivity{
 			if (activity != null) {
 				switch (msg.what) {
 				case 0:
-					if (activity.mProgressDialog != null) activity.mProgressDialog.dismiss();
+//					if (activity.mProgressDialog != null) activity.mProgressDialog.dismiss();
 					activity.mVoteDetail = (VoteDetail) msg.obj;
 					
 					for (Vote.Option option : activity.mVoteDetail.getVote().getOptions()) {
@@ -476,7 +476,7 @@ public class VoteDetailActivity extends BaseDetailActivity{
 					activity.clearRefreshAnimation();
 					break;
 				case 1:
-					if (activity.mProgressDialog != null) activity.mProgressDialog.dismiss();
+//					if (activity.mProgressDialog != null) activity.mProgressDialog.dismiss();
 					activity.updateVoteStatus(2);
 					ViewUtils.displayMessage(activity,(String) msg.obj);
 					activity.clearRefreshAnimation();

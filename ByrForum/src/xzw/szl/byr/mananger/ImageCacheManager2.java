@@ -5,7 +5,6 @@ import java.util.Queue;
 
 import xzw.szl.byr.utils.ImageUtils;
 import xzw.szl.byr.utils.NetStatus;
-import xzw.szl.byr.utils.ViewUtils;
 
 import android.graphics.Bitmap;
 import android.os.Build;
@@ -102,7 +101,7 @@ public enum ImageCacheManager2 {
 		return bitmap;
 	}
 	
-	public void startAcquireImage2(String url,ImageAcquireListener imageAcquireListener,int w, int h) {
+	public void startAcquireImage2(String url,ImageAcquireListener imageAcquireListener,int w, int h,boolean isScrolling) {
 		
 		if (!isRunning) {
 			isRunning = true;
@@ -120,6 +119,7 @@ public enum ImageCacheManager2 {
 			task.listener = imageAcquireListener;
 			task.width = w;
 			task.height= h;
+			task.isScrolling = isScrolling;
 		//	if (!tasks.contains(task)) {   //下载队列里没有
 				synchronized (r) {
 					tasks.add(task);
@@ -152,11 +152,12 @@ public enum ImageCacheManager2 {
 					
 					if (bitmap != null) {
 						t.listener.onSuccess(bitmap);
-					}  else {
+					}  else if(!t.isScrolling) {
 						// download image from Internet
 						ImageUtils.getInternetImage(t.url);
 						
 						bitmap = ImageUtils.getSDImage(t.url,t.width,t.height);
+						
 						if (bitmap == null) {
 							t.listener.onFailure();
 							continue;
@@ -191,11 +192,12 @@ public enum ImageCacheManager2 {
 		cache.evictAll();	
 	}
 	
-	private class Task{
+	private static class Task{
 		String url;
 		ImageAcquireListener listener;
 		int width;
 		int height;
+		boolean isScrolling;
 		
 		@Override
 		public boolean equals(Object o) {

@@ -11,7 +11,8 @@ import xzw.szl.byr.dialog.ForwardMailDialog;
 import xzw.szl.byr.dialog.UserInfoDialog;
 import xzw.szl.byr.info.Mail;
 import xzw.szl.byr.mananger.ByrThreadPool;
-import xzw.szl.byr.mananger.ImageCacheManager;
+import xzw.szl.byr.mananger.ImageCacheManager2;
+import xzw.szl.byr.utils.ByrBase;
 import xzw.szl.byr.utils.DataUtils;
 import xzw.szl.byr.utils.HttpUtils;
 import xzw.szl.byr.utils.JsonUtils;
@@ -215,8 +216,11 @@ public class MailDetailActivity extends BaseDetailActivity implements OnClickLis
 			}
 			mName.setText(mMail.getUser().getId());
 			
-			ImageCacheManager.INSTANCE.startAcquireImage(mMail.getUser().getFace_url(),
-					ImageCacheManager.getFaceImageAcquireListener(mFace, handler));
+			ImageCacheManager2.INSTANCE.startAcquireImage2(mMail.getUser().getFace_url(),
+					ImageCacheManager2.getFaceImageAcquireListener(mFace, handler),
+					DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
+					DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
+					false);
 		}
 		
 		CharSequence sequence = Html.fromHtml(DataUtils.getHtmlFromString(mMail.getContent(),mMail.getAttachment()), 

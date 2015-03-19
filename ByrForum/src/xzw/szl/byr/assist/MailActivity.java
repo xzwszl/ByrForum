@@ -12,8 +12,8 @@ import xzw.szl.byr.info.ByrMail;
 import xzw.szl.byr.info.Mail;
 import xzw.szl.byr.info.Pagination;
 import xzw.szl.byr.mananger.ByrThreadPool;
-import xzw.szl.byr.mananger.ImageCacheManager;
-import xzw.szl.byr.mananger.ImageCacheManager.ImageAcquireListener;
+import xzw.szl.byr.mananger.ImageCacheManager2;
+import xzw.szl.byr.mananger.ImageCacheManager2.ImageAcquireListener;
 import xzw.szl.byr.swipe.SwipeAdapter;
 import xzw.szl.byr.swipe.SwipeLayout;
 import xzw.szl.byr.utils.ByrBase;
@@ -61,7 +61,6 @@ public class MailActivity extends BaseActivity implements OnRefreshListener{
     private int mCurrentPosition = -1;
     
     
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -503,7 +502,11 @@ public class MailActivity extends BaseActivity implements OnRefreshListener{
 				} else {
 					holder.name.setTextColor(getResources().getColor(R.color.dark_blue));
 				}
-				ImageCacheManager.INSTANCE.startAcquireImage(mail.getUser().getFace_url(), getFaceImageAcquireListener(holder.face));
+				ImageCacheManager2.INSTANCE.startAcquireImage2(mail.getUser().getFace_url(), 
+						getFaceImageAcquireListener(holder.face),
+						DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
+						DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
+						false);
 				
 			} else {
 				holder.name.setText("未知");

@@ -7,20 +7,16 @@ import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifTextView;
 import xzw.szl.byr.info.Attachment;
 import xzw.szl.byr.info.ByrFile;
-import xzw.szl.byr.mananger.ImageCacheManager;
 import xzw.szl.byr.mananger.ImageCacheManager2;
 import xzw.szl.byr.mananger.ImageCacheManager2.ImageAcquireListener;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.text.Html;
-import android.util.DisplayMetrics;
-import android.view.View;
 import android.widget.TextView;
 
 public class URLImageGetter implements Html.ImageGetter{
@@ -85,7 +81,7 @@ public class URLImageGetter implements Html.ImageGetter{
 						URLDrawable bd = new URLDrawable();
 						bd.setBounds(0,0,bd.getIntrinsicWidth(),bd.getIntrinsicHeight());
 						
-						ImageCacheManager2.INSTANCE.startAcquireImage2(url,getContentImageAcquireListener(tv, bd) ,width, height);
+						ImageCacheManager2.INSTANCE.startAcquireImage2(url,getContentImageAcquireListener(tv, bd) ,width, height,false);
 						return bd;
 					}
 				}
@@ -112,7 +108,7 @@ public class URLImageGetter implements Html.ImageGetter{
 //			return new Rect((int)(width-w/r)/2, 0, (int)(width+w/r)/2, (int)(h/r));
 //		}
 	}
-	class URLDrawable extends BitmapDrawable {
+	static class URLDrawable extends BitmapDrawable {
 		
 		 BitmapDrawable drawable;
 

@@ -13,7 +13,7 @@ import xzw.szl.byr.info.Pagination;
 import xzw.szl.byr.info.Refer;
 import xzw.szl.byr.info.User;
 import xzw.szl.byr.mananger.ByrThreadPool;
-import xzw.szl.byr.mananger.ImageCacheManager;
+import xzw.szl.byr.mananger.ImageCacheManager2;
 import xzw.szl.byr.swipe.SwipeAdapter;
 import xzw.szl.byr.utils.ByrBase;
 import xzw.szl.byr.utils.DataUtils;
@@ -33,7 +33,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AbsListView.LayoutParams;
 import android.widget.AdapterView.OnItemClickListener;
@@ -382,8 +381,12 @@ public class ReferActivity extends BaseActivity implements OnRefreshListener{
 						holder.id.setTextColor(getResources().getColor(R.color.dark_blue));
 					}
 					if (user.getFace_url() != null) {
-						ImageCacheManager.getInstance().startAcquireImage(user.getFace_url(),
-								ImageCacheManager.getFaceImageAcquireListener(holder.face, mHandler));
+						
+						ImageCacheManager2.getInstance().startAcquireImage2(user.getFace_url(),
+								ImageCacheManager2.getFaceImageAcquireListener(holder.face, mHandler),
+								DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
+								DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
+								false);
 					}
 				}
 				

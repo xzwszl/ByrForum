@@ -16,10 +16,10 @@ public class DBManager {
 	private AtomicInteger mConnectCount = new AtomicInteger();
 	//根据网络类型，定义缓存有效时间
 	private final long TIME_INVALID = 1000 * 1000 * 60 * 60 * 24 * 30; // 1 mouth 
-	private final long TIMEOUT_2G = 1000 * 1000 * 60 * 60 * 24; // one day
-	private final long TIMEOUT_3G = 1000 * 1000 * 60 * 60 * 12;  // 12 hour
-	private final long TIMEOUT_4G = 1000 * 1000 * 60 * 60; //60 minutes
-	private final long TIME_WIFI = 1000 * 1000 * 60 * 30; // 30 minutes
+	private final long TIMEOUT_2G = 1000 * 1000 * 60 * 60 * 12; // one day
+	private final long TIMEOUT_3G = 1000 * 1000 * 60 * 60 * 60;  // 1 hour
+	private final long TIMEOUT_4G = 1000 * 1000 * 60 * 30; //30 minutes
+	private final long TIME_WIFI = 1000 * 1000 * 60 * 5; // 5 minutes
 
 	
 	
@@ -70,10 +70,9 @@ public class DBManager {
 	
 	//关闭数据连接 
 	public void closeDatabase() {
-	//	synchronized (instance) {
-	//		if (mConnectCount.decrementAndGet() == 0) {
-				mDB.close();
-	//		}
-	//	}
+		synchronized (instance) {
+			mConnectCount.addAndGet(0);
+			mDB.close();
+		}
 	}
 }

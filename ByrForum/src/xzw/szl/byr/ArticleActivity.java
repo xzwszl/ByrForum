@@ -19,7 +19,8 @@ import xzw.szl.byr.info.Pagination;
 import xzw.szl.byr.info.Threads;
 import xzw.szl.byr.info.User;
 import xzw.szl.byr.mananger.ByrThreadPool;
-import xzw.szl.byr.mananger.ImageCacheManager;
+import xzw.szl.byr.mananger.ImageCacheManager2;
+import xzw.szl.byr.utils.ByrBase;
 import xzw.szl.byr.utils.DataUtils;
 import xzw.szl.byr.utils.HttpUtils;
 import xzw.szl.byr.utils.JsonUtils;
@@ -29,38 +30,28 @@ import xzw.szl.byr.utils.ViewUtils;
 import xzw.szl.byr.view.CircleImageView;
 import xzw.szl.byr.view.FaceSelectView;
 import xzw.szl.byr.view.FaceSelectView.OnAttachMentSelectListener;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.Html;
-import android.text.TextUtils;
-import android.text.TextUtils.TruncateAt;
 import android.text.method.LinkMovementMethod;
 
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 public class ArticleActivity extends BaseActivity {
@@ -91,15 +82,12 @@ public class ArticleActivity extends BaseActivity {
 	private boolean isRefreshable;
 	private int lastPage;
 	private String account;
-	private final String TAG = "ArticleActivity";
+//	private final String TAG = "ArticleActivity";
 	private Article mFArticle;
-//	private boolean isBusy = false;
-//	private int firstVisiblePosition= 0;
-//	private int lastVisiblePosition =0;
-//	private int totalCount = 0;
-//	private SparseArray<Article> mDelay;
 	private ILoadingLayout startLabels;
 	private ILoadingLayout endLabels;
+	
+	private boolean isScrolling;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -210,46 +198,14 @@ public class ArticleActivity extends BaseActivity {
 			
 			@Override
 			public void onScrollStateChanged(AbsListView view, int scrollState) {
-//				switch (scrollState) {
-//				case OnScrollListener.SCROLL_STATE_IDLE:
-//					isBusy = false;
-//					
-//					int i= firstVisiblePosition == 0?1:firstVisiblePosition;
-//					int last = lastVisiblePosition >= totalCount -1 ? totalCount-1 : lastVisiblePosition+1;
-//					for (int j=0;i<last-i;j++) {
-//						
-//						Article article = mDelay.get(i+j-1);
-//						if (article != null) {
-//							if(view.getChildAt(j) != null) {
-//								ViewHolder holder = (ViewHolder) view.getChildAt(j).getTag();
-//								if (holder == null) continue;
-//								
-//								if (article.getUser() != null && article.getUser().getFace_url() != null)
-//									ImageCacheManager.INSTANCE.startAcquireImage(article.getUser().getFace_url(),ImageCacheManager.getFaceImageAcquireListener(holder.face,handler));
-//								CharSequence sequence = Html.fromHtml(DataUtils.getHtmlFromString(
-//										article.getContent(),article.getAttachment()),
-//										new URLImageGetter(holder.content,ArticleActivity.this, article.getAttachment(), handler,view.getWidth(),view.getHeight()), new MyTagHandler(ArticleActivity.this,article.getAttachment()));
-//								holder.content.setText(sequence);
-//							}
-//						} 
-//					}
-//					break;
-//				case OnScrollListener.SCROLL_STATE_FLING:
-//					isBusy = true;
-//				case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
-//					isBusy = true;
-//				default:
-//					break;
-//				}
+					
+				isScrolling = (scrollState == OnScrollListener.SCROLL_STATE_FLING);
 			}
 			
 			@Override
 			public void onScroll(AbsListView view, int firstVisibleItem,
 					int visibleItemCount, int totalItemCount) {
-//				
-//				firstVisiblePosition = firstVisibleItem;
-//				lastVisiblePosition = firstVisibleItem + visibleItemCount;
-//				totalCount = totalItemCount;
+
 			}
 		});
 		mFace = (ImageView) findViewById(R.id.article_face);
@@ -401,63 +357,6 @@ public class ArticleActivity extends BaseActivity {
 		ByrThreadPool.getTHreadPool().submit(r);
 	}
 	
-//	private Runnable runnable = new Runnable() {
-//		
-//		@Override
-//		public void run() {
-//			// 下载
-//			while (isRunning) {
-//				
-//				//队列飞空，则下载
-//				while (!task.isEmpty()) {
-//					Task t = task.poll();
-//					// 先从sd卡读取
-//					Bitmap bitmap = ImageUtils.getInternetImage(t.url);
-//					if (bitmap != null) {
-//						
-//						
-//						if (t.imageView != null) {
-//							Bitmap bm = ImageUtils.compressImage(bitmap, DataUtils.getDisplayValue(40), DataUtils.getDisplayValue(40));
-//							addBitmapToMemoryCache(t.url, bm);
-//							bitmap.recycle();
-//							handler.obtainMessage(1,t).sendToTarget();
-//							
-//						}
-//						else {
-//							addBitmapToMemoryCache(t.url, bitmap);
-//							handler.obtainMessage(2,t).sendToTarget();
-//						}
-//					}
-//				}
-//				
-//				//task队列为空，则等待
-//				synchronized (this) {
-//					try {
-//						this.wait();
-//					} catch (InterruptedException e) {
-//						isRunning = false;
-//						e.printStackTrace();
-//					}
-//				}
-//			}
-//		}
-//	};
-	
-
-//	class Task {
-//		String url;
-//		ImageView imageView;
-//		URLDrawable bd;
-//		GifTextView tv;
-//		@Override
-//		public boolean equals(Object o) {
-//			Task t = (Task)o;
-//			if (this.url.equals(t.url)) return true;
-//			return false;
-//		}
-//		
-//		
-//	}
 	
 	private  static  class ArticleHandler extends Handler {
 		private SoftReference<ArticleActivity> activity;
@@ -653,7 +552,10 @@ public class ArticleActivity extends BaseActivity {
 				String url = user.getFace_url();
 				if (url != null) {
 //					if (!isBusy)
-					ImageCacheManager.INSTANCE.startAcquireImage(user.getFace_url(),ImageCacheManager.getFaceImageAcquireListener(holder.face,handler));
+					ImageCacheManager2.INSTANCE.startAcquireImage2(user.getFace_url(),
+							ImageCacheManager2.getFaceImageAcquireListener(holder.face,handler),
+							DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),DataUtils.getDisplayValue(ByrBase.FACE_WIDTH),
+							isScrolling);
 				} else {
 					holder.face.setImageResource(R.drawable.face_default_m);
 				}
@@ -664,7 +566,7 @@ public class ArticleActivity extends BaseActivity {
 					@Override
 					public void onClick(View v) {
 						
-						Log.i(TAG,"face_onclick");
+//						Log.i(TAG,"face_onclick");
 						
 						UserInfoDialog userInfoDialog = new UserInfoDialog(ArticleActivity.this,user,handler);
 						
@@ -728,7 +630,7 @@ public class ArticleActivity extends BaseActivity {
 				@Override
 				public void onClick(View v) {
 					
-					Log.i(TAG,"operation_onclick");
+//					Log.i(TAG,"operation_onclick");
 					String tag = (String)v.getTag();
 					if (tag.equals("gray")) {
 						//showPopupWindow(v,position);
